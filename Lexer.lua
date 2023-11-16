@@ -31,9 +31,11 @@ function Lexer.ParseCode(code)
                 currentToken, allTokens = OverToken(currentToken, allTokens)
             end
         elseif char == ' ' then
-            currentToken, allTokens = OverToken(currentToken, allTokens)    
+            if currentToken.type ~= "POSSIBLE_STRING" then
+                currentToken, allTokens = OverToken(currentToken, allTokens)
+            end
         else
-            if currentToken.type == "WHITESPACE" or currentToken.type == "INT" then
+            if currentToken.type == "WHITESPACE" or currentToken.type == "INT" or currentToken.type == "DOUBLE" then
                 currentToken, allTokens = OverToken(currentToken, allTokens)    
                 currentToken:updateType("IDENTIFIANT")
             end
@@ -41,6 +43,8 @@ function Lexer.ParseCode(code)
         end
     end
     
+    currentToken, allTokens = OverToken(currentToken, allTokens)
+
     for i = 1, #allTokens do
         token = allTokens[i]
         if token.type == "IDENTIFIANT" and (token.content == "true" or token.content == "false") then
@@ -56,6 +60,12 @@ function OverToken(currentToken, listTokens)
         table.insert(listTokens, currentToken)
     end
     return Token:new(), listTokens
+end
+
+function Lexer.show(listTokens)
+    for i, token in pairs(listTokens) do
+        print("i: "..i..", "..token.content)
+    end
 end
 
 return Lexer
