@@ -15,7 +15,7 @@ SQL Like Language for the Roblox Plugin **RoDatabase**.
 
 Format to follow : **CREATE TABLE <name of your table> ( <name of value> <domain of the value> )**
     
-Example :
+Examples :
 - *CREATE TABLE void_in_this_table ()*
 - *CREATE TABLE users_info (name TEXT, numberPunishments INT)*
 - *CREATE TABLE users_info_v2 (name TEXT, numberPunishments INT, isBanned BOOL, reason_ban_if_do TEXT)*
