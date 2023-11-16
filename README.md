@@ -41,3 +41,35 @@ values:
         name: mon_nom
         domain: TEXT
 ```
+
+## Insert default values for someone or everyone
+
+Format to follow if you want to insert a default value for everyone : **INSERT INTO <name of the table> VALUES (*, <value> <domain>, ...)**
+In this format, ** \* ** tells the program that it will be for everyone
+
+Format to follow if you want to insert a default value for a player : **INSERT INTO <name of the table> VALUES (<id of the roblox user>, <value> <domain>, ...)**
+In this format, ** \id of the roblox user ** will give the default value(s) to this player.
+
+Examples :
+- *INSERT INTO info_users VALUES (1, "Hello it's my description", 16)*
+-> ID, description TEXT, age INT
+- *INSERT INTO info_confidential VALUES (1, true, 10)*
+-> ID, is13yearsold BOOL, numberOfFriends INT
+
+Example with code :
+```
+local Lexer = require("Lexer")
+local Parser = require("Parser")
+
+local tokens = Lexer.ParseCode("CREATE TABLE MyT (mon_nom TEXT,)")
+local res = Parser.run(tokens)
+tokens = Lexer.ParseCode("INSERT INTO MyT VALUES (1, 'cc', false, 100.0)")
+res = Parser.run(tokens)
+Parser.show(res)
+```
+
+
+# Links
+
+[Plugin](https://create.roblox.com/marketplace/asset/15364884409/RoDatabase%3Fkeyword=&pageNumber=&pagePosition=)
+[DevForum Post](https://devforum.roblox.com/t/rodatabase-plugin-for-datastores/2702468/2)
