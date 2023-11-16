@@ -67,7 +67,14 @@ tokens = Lexer.ParseCode("INSERT INTO MyT VALUES (1, 'cc', false, 100.0)")
 res = Parser.run(tokens)
 Parser.show(res)
 ```
-
+```
+target: 1
+table_target: MyT
+values:
+    1: cc
+    2: false
+    3: 100.0
+```
 
 # Links
 
