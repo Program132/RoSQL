@@ -20,7 +20,7 @@ function Token.new()
 end
 
 function Token.debug(self)
-    return "\nTOKEN: \n"..self.content.."\n"..Types[self.type].."\n"
+    return "\nTOKEN: "..self.content.."\n"..Types[self.type].."\n"
 end
 
 function Token.updateContent(self, newContent)
