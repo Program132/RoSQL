@@ -19,11 +19,11 @@ function create_table_instruction(listTokens) -- CREATE TABLE <name> (<value> <d
     if #listTokens < 5 then
         return "Missing arguments ! Minimum of the instruction is: 'CREATE TABLE <name of your table> ()'"
     end
-    
+
     if listTokens[3].type ~= "IDENTIFIANT" then
         return "Write like a classic text for the name of your table !"
     end
-    
+
     local tableName = listTokens[3]
 
     if listTokens[4].type ~= "OPERATOR" and listTokens[4].content ~= "(" then
@@ -66,8 +66,12 @@ function create_table_instruction(listTokens) -- CREATE TABLE <name> (<value> <d
     return create_table
 end
 
-function insert_into_instruction(listTokens) -- INSERT INTO <name of the table> VALUES (*/<id>, <value> <domain>, ...)
+function insert_into_instruction(listTokens) -- INSERT INTO <name of the table> VALUES (*/<id>, <value>, ...)
     local insert_table = {}
+
+    if #listTokens < 9 then
+        return "Missing arguments ! Minimum of the instruction is: 'INSERT INTO <name of the table> VALUES (*/<id>, <value>)'"
+    end
 
     if listTokens[3].type ~= "IDENTIFIANT" then
         return "Write the valid table name !"
@@ -102,6 +106,15 @@ function insert_into_instruction(listTokens) -- INSERT INTO <name of the table> 
         if not listTokens[index] then
             return "Give the value"
         end
+
+        if listTokens[index].type ~= "STRING"
+        and listTokens[index].type ~= "INT"
+        and listTokens[index].type ~= "DOUBLE"
+        and listTokens[index].type ~= "BOOL"
+        then
+            return "Give a correct value !"
+        end
+
         local currentValue = listTokens[index].content
         table.insert(insert_table["values"], currentValue)
         index = index + 1
@@ -134,4 +147,4 @@ function Parser.show(t, indent)
 end
 
 
-return Parser 
+return Parser
