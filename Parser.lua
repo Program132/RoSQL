@@ -86,7 +86,7 @@ function insert_into_instruction(listTokens) -- INSERT INTO <name of the table> 
     end
 
 
-    if listTokens[6].type ~= "INT" and listTokens[4].content ~= "*" then
+    if listTokens[6].type ~= "INT" and listTokens[6].content ~= "*" then
         return "Give the target -> '*' for every players or give the ID of the Player"
     end
 
